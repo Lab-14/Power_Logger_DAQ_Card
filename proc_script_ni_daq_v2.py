@@ -1,6 +1,7 @@
 import scipy.io
 import numpy as np
 import os
+import re
 
 # Python 3 code to find sum of elements in given array
 def _sum(arr):
@@ -20,6 +21,8 @@ file_id = 'Data_20211028T155029'
 file_index = 0
 # data_stack = np.empty((0,999), float)
 data_stack = np. array([])
+entries_stack = np. array([])
+Comb_Stack = np. array([])
 
 entries = os.listdir(path+folder+'/')
 entries.sort() #good initial sort but doesnt sort numerically very well
@@ -30,6 +33,12 @@ print (len(entries))
 while file_index<len(entries):
 
     print(file_index)
+
+    # print(entries.split("Data_"))
+    # print ([i.split('_', 1)[0] for i in entries])
+
+    entries_label = re.split('_|.mat', entries[file_index])[1]
+    # print (entries_label)
 
     # mat_data = scipy.io.loadmat(path+folder+file_id+'.mat')
     mat_data = scipy.io.loadmat(path+folder+'/'+entries[file_index])
@@ -49,7 +58,13 @@ while file_index<len(entries):
     # print (ans)
     data_stack = np.append(data_stack, ans_norm)
     # print(data_stack)
+    entries_stack = np.append(entries_stack, entries_label)
+    # print(entries_stack)
+
+    Comb_Stack =  np.column_stack((entries_stack, data_stack))
 
     file_index = file_index+1
 
-np.savetxt(folder, data_stack)
+    # print (Comb_Stack)
+
+np.savetxt((folder+'_Data_Vrms.csv'), Comb_Stack, delimiter=',', fmt="%s")
