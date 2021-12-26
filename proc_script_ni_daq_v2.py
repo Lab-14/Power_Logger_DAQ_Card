@@ -14,9 +14,11 @@ def _sum(arr):
 
 path = '/media/manoj/0C0CF5C50CF5A9BA/Users/manojg/Documents/NI_DAQ_Scripts/'
 
-folder = 'Data_Backup_28102021'
+folder = 'Data_Backup_10112021 [CAM2N3 8FPS OVERLAP43 5K Frames] [Scale-3] REPEAT SET/Voltage_data'
 
-file_id = 'Data_20211028T155029'
+csvfile_name = '[CAM2N3 8FPS OVERLAP43 5K Frames] [Scale-3] REPEAT SET_Voltage_data'
+
+# file_id = 'Data_20211028T155029'
 
 file_index = 0
 # data_stack = np.empty((0,999), float)
@@ -67,4 +69,4 @@ while file_index<len(entries):
 
     # print (Comb_Stack)
 
-np.savetxt((folder+'_Data_Vrms.csv'), Comb_Stack, delimiter=',', fmt="%s")
+np.savetxt((csvfile_name+'_Data_Vrms.csv'), Comb_Stack, delimiter=',', fmt="%s")
